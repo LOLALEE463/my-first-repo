@@ -16,6 +16,10 @@
             background-color: #000;
             color: #fff;
             font-family: Arial, sans-serif;
+            line-height: 1.6;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Navigation */
@@ -23,10 +27,13 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 30px 60px;
+            padding: 20px 40px;
             background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
             backdrop-filter: blur(10px);
             z-index: 1000;
+            height: 80px;
+            display: flex;
+            align-items: center;
         }
 
         .nav-container {
@@ -35,23 +42,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
         .logo {
-            height: 40px;
+            height: 60px;
             display: flex;
             align-items: center;
+            margin-right: 40px;
         }
 
         .logo img {
             height: 100%;
             width: auto;
+            object-fit: contain;
         }
 
         .menu {
             display: flex;
             gap: 60px;
-            margin: 0 40px;
+            margin-left: 40px;
         }
 
         .menu-item {
@@ -60,7 +70,7 @@
 
         .menu-item a {
             color: #fff;
-            font-size: 16px;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-decoration: none;
@@ -128,6 +138,8 @@
             display: flex;
             align-items: flex-end;
             justify-content: flex-end;
+            padding-bottom: 40px;
+            padding-right: 40px;
         }
 
         .slide.active {
@@ -135,23 +147,18 @@
         }
 
         .hero-content {
-            padding: 40px 60px;
-            margin-right: 120px;
-            margin-bottom: 100px;
+            padding: 30px 40px;
+            margin-right: 0;
+            margin-bottom: 0;
             position: relative;
             z-index: 2;
             display: inline-block;
-            background: linear-gradient(
-                to right,
-                rgba(0, 0, 0, 0.4),
-                rgba(0, 0, 0, 0.2),
-                rgba(0, 0, 0, 0.1)
-            );
+            text-align: right;
         }
 
         .hero-content h1 {
             color: #fff;
-            font-size: 32px;
+            font-size: clamp(1.2rem, 2.5vw + 0.8rem, 2.5rem);
             font-weight: 300;
             letter-spacing: 2px;
             margin-bottom: 20px;
@@ -159,17 +166,24 @@
             transform: translateY(20px);
             animation: fadeInUp 0.8s ease forwards;
             white-space: nowrap;
+            text-align: right;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8),
+                         0 0 30px rgba(0, 0, 0, 0.6);
+            line-height: 1.2;
         }
 
         .hero-content p {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 16px;
+            font-size: clamp(1rem, 1.5vw + 0.8rem, 1.8rem);
             letter-spacing: 1px;
-            line-height: 1.6;
+            line-height: 1.5;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s ease 0.2s forwards;
             white-space: nowrap;
+            text-align: right;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8),
+                         0 0 20px rgba(0, 0, 0, 0.6);
         }
 
         @keyframes fadeInUp {
@@ -181,7 +195,7 @@
 
         /* Project Section */
         .section-title {
-            font-size: 24px;
+            font-size: clamp(1.8rem, 2.5vw + 1rem, 2.8rem);
             margin: 40px;
             text-transform: uppercase;
         }
@@ -245,7 +259,7 @@
         }
 
         .project-info h3 {
-            font-size: 24px;
+            font-size: clamp(1.2rem, 1.8vw + 0.8rem, 2rem);
             margin-bottom: 8px;
             font-weight: 300;
             letter-spacing: 1px;
@@ -253,7 +267,7 @@
         }
 
         .project-info p {
-            font-size: 14px;
+            font-size: clamp(0.9rem, 1.2vw + 0.6rem, 1.4rem);
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -342,7 +356,7 @@
 
         .about-text {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 18px;
+            font-size: clamp(1rem, 1.5vw + 0.8rem, 1.6rem);
             line-height: 1.8;
             color: rgba(255, 255, 255, 0.9);
             position: relative;
@@ -358,7 +372,7 @@
 
         .highlight-year {
             font-family: 'Space Mono', monospace;
-            font-size: 24px;
+            font-size: clamp(1.2rem, 1.5vw + 1rem, 2rem);
             color: #D4AF37;
             margin-bottom: 20px;
             display: inline-block;
@@ -392,13 +406,24 @@
             }
         }
 
-        /* 添加打字机效果的样式 */
+        /* 删除原有的打字机效果样式，替换为渐变线条样式 */
         .typing-effect {
-            border-right: 2px solid #D4AF37;
-            animation: blink 0.7s step-end infinite;
-            white-space: pre-wrap;
+            position: relative;
+            padding-right: 20px;
+            border-right: none; /* 移除原有的闪烁边框 */
         }
 
+        .typing-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #D4AF37, rgba(212, 175, 55, 0.2), transparent);
+        }
+
+        /* 删除原有的闪烁动画 */
         @keyframes blink {
             from, to { border-color: transparent }
             50% { border-color: #D4AF37 }
@@ -429,7 +454,7 @@
 
         .culture-title-cn {
             font-family: "SimSun", serif;
-            font-size: 48px;
+            font-size: clamp(2rem, 3vw + 1.5rem, 3.5rem);
             letter-spacing: 4px;
             color: #D4AF37;
             margin-bottom: 10px;
@@ -437,7 +462,7 @@
 
         .culture-title-en {
             font-family: "Times New Roman", serif;
-            font-size: 32px;
+            font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
             color: #D4AF37;
             font-weight: 300;
         }
@@ -467,6 +492,7 @@
         .culture-text-en p {
             margin-bottom: 20px;
             transition: color 0.3s ease;
+            font-size: clamp(1rem, 1.5vw + 0.8rem, 1.8rem);
         }
 
         .culture-text-en p:hover {
@@ -570,11 +596,11 @@
         }
 
         .culture-title-cn {
-            font-size: 48px;
+            font-size: clamp(2rem, 3vw + 1.5rem, 3.5rem);
         }
 
         .culture-title-en {
-            font-size: 32px;
+            font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
         }
 
         .culture-text-en {
@@ -627,7 +653,7 @@
 
         .footer-item h4 {
             color: #D4AF37;
-            font-size: 16px;
+            font-size: clamp(0.9rem, 1vw + 0.6rem, 1.3rem);
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 15px;
@@ -636,7 +662,7 @@
 
         .footer-item p {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
+            font-size: clamp(0.8rem, 0.8vw + 0.5rem, 1.1rem);
             letter-spacing: 1px;
             font-weight: 300;
         }
@@ -691,10 +717,145 @@
 
         .footer-bottom p {
             color: rgba(255, 255, 255, 0.4);
-            font-size: 12px;
+            font-size: clamp(0.7rem, 0.7vw + 0.4rem, 1rem);
             letter-spacing: 1.5px;
             text-transform: uppercase;
             font-weight: 300;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 优化响应式文字基础设置 */
+        :root {
+            /* 基础字体大小设置，在不同视口宽度下平滑过渡 */
+            font-size: clamp(14px, calc(14px + 0.390625vw), 18px);
+        }
+
+        /* 更新文字相关的响应式样式 */
+        .hero-content h1 {
+            font-size: clamp(1.2rem, 2.5vw + 0.8rem, 2.5rem);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 1.5vw + 0.8rem, 1.8rem);
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 2.5vw + 1rem, 2.8rem);
+        }
+
+        .project-info h3 {
+            font-size: clamp(1.2rem, 1.8vw + 0.8rem, 2rem);
+        }
+
+        .project-info p {
+            font-size: clamp(0.9rem, 1.2vw + 0.6rem, 1.4rem);
+        }
+
+        .about-text {
+            font-size: clamp(1rem, 1.5vw + 0.8rem, 1.6rem);
+        }
+
+        .culture-title-cn {
+            font-size: clamp(2rem, 3vw + 1.5rem, 3.5rem);
+        }
+
+        .culture-title-en {
+            font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+        }
+
+        .culture-text-en p {
+            font-size: clamp(1rem, 1.5vw + 0.8rem, 1.8rem);
+        }
+
+        .news-content h3 {
+            font-size: clamp(1rem, 1.5vw + 0.8rem, 1.6rem);
+        }
+
+        .news-content .date {
+            font-size: clamp(0.8rem, 1vw + 0.6rem, 1.2rem);
+        }
+
+        /* 移动设备优化 */
+        @media screen and (max-width: 768px) {
+            :root {
+                font-size: clamp(12px, calc(12px + 1vw), 16px);
+            }
+
+            .nav-container {
+                padding: 10px 20px;
+            }
+
+            .menu {
+                gap: 20px;
+                font-size: clamp(0.8rem, 1.2vw + 0.6rem, 1rem);
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-grid, .culture-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* 小屏幕设备优化 */
+        @media screen and (max-width: 480px) {
+            :root {
+                font-size: clamp(10px, calc(10px + 1vw), 14px);
+            }
+
+            .menu {
+                gap: 15px;
+                font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
+            }
+
+            .hero-content {
+                padding: 15px;
+            }
+
+            .section-title {
+                margin: 20px;
+            }
+
+            .project-info {
+                padding: 10px;
+            }
+        }
+
+        /* 确保文本可读性 */
+        body {
+            line-height: 1.6;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 优化长文本的可读性 */
+        .about-text p,
+        .culture-text-en p,
+        .news-content p {
+            max-width: min(70ch, 90vw);
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        /* 确保图片响应式 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
     </style>
 </head>
@@ -710,13 +871,13 @@
                     <a href="#about">ABOUT</a>
                 </div>
                 <div class="menu-item">
-                    <a href="#news">NEWS</a>
-                </div>
-                <div class="menu-item">
                     <a href="#project">PROJECT</a>
                 </div>
                 <div class="menu-item">
                     <a href="#culture">CULTURE</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#news">NEWS</a>
                 </div>
                 <div class="menu-item">
                     <a href="#contact">CONTACT</a>
@@ -772,14 +933,14 @@
         </div>
     </section>
 
-    <h2 class="section-title">Project</h2>
+    <h2 class="section-title" id="project">Project</h2>
     <section class="project-grid">
         <div class="project-item">
             <a href="project1.html" style="text-decoration: none; color: inherit; display: block; width: 100%; height: 100%;">
                 <div class="project-image">
                     <img src="project1.jpg" alt="Project 1">
                     <div class="project-info">
-                        <h3>Shenzhen C Tower</h3>
+                        <h3>Shenzhen Bay Super Headquarters Base C Tower </h3>
                         <p>Shenzhen</p>
                     </div>
                 </div>
@@ -789,7 +950,7 @@
             <div class="project-image">
                 <img src="project2.jpg" alt="Project 2">
                 <div class="project-info">
-                    <h3>ShenTonWay</h3>
+                    <h3>8 Shenton Way</h3>
                     <p>Singapore</p>
                 </div>
             </div>
@@ -798,8 +959,8 @@
             <div class="project-image">
                 <img src="project3.jpg" alt="Project 3">
                 <div class="project-info">
-                    <h3>Philippines Resort</h3>
-                    <p>Philippines</p>
+                    <h3>Peninsula Integrated Resort </h3>
+                    <p>Cambodia</p>
                 </div>
             </div>
         </div>
@@ -816,14 +977,14 @@
             <div class="project-image">
                 <img src="project5.jpg" alt="Project 5">
                 <div class="project-info">
-                    <h3>Marina</h3>
-                    <p>Marina</p>
+                    <h3>Marina Bellwethers Tower</h3>
+                    <p>Dubai</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <h2 class="section-title">ABOUT</h2>
+    <h2 class="section-title" id="about">ABOUT</h2>
     <section class="about">
         <div class="about-grid">
             <a href="about.html" class="about-image">
@@ -843,7 +1004,7 @@
         </div>
     </section>
 
-    <h2 class="section-title">Culture</h2>
+    <h2 class="section-title" id="culture">Culture</h2>
     <section class="culture">
         <div class="culture-grid">
             <div class="culture-content">
@@ -900,7 +1061,7 @@
         </div>
     </section>
 
-    <footer>
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-info">
                 <div class="footer-item">
