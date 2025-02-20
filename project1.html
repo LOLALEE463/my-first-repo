@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shenzhen C Tower - RBS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .project-container {
+            display: grid;
+            grid-template-columns: 45% 55%;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .project-image {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            padding: 40px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 60px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .project-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .project-content::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 2px;
+        }
+
+        .project-title {
+            font-size: 42px;
+            color: #D4AF37;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .info-section {
+            margin-bottom: 60px;
+            position: relative;
+            padding-left: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #D4AF37, transparent);
+        }
+
+        .info-section h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .info-section p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .highlights-list {
+            list-style: none;
+        }
+
+        .highlights-list li {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .highlights-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #D4AF37;
+            border-radius: 50%;
+        }
+
+        .info-section:nth-child(2) { animation-delay: 0.2s; }
+        .info-section:nth-child(3) { animation-delay: 0.4s; }
+        .info-section:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">RBS</a>
+    </nav>
+
+    <div class="project-container">
+        <div class="project-image">
+            <img src="project1.jpg" alt="Shenzhen C Tower">
+        </div>
+
+        <div class="project-content">
+            <h1 class="project-title">Shenzhen Bay Super Headquarters Base C Tower</h1>
+
+            <div class="info-section">
+                <h3>RBS Service Category</h3>
+                <p>Gemdale Group + RBS Consortium Full Process Engineering Consulting</p>
+            </div>
+
+            <div class="info-section">
+                <h3>Client</h3>
+                <p>Shenzhen Bay Area Urban Construction Development Co., Ltd.</p>
+            </div>
+
+            <div class="info-section">
+                <h3>Architectural Design</h3>
+                <p>Zaha Hadid Architects</p>
+            </div>
+
+            <div class="info-section">
+                <h3>Project Overview</h3>
+                <p>The C-Tower project of Shenzhen Bay Super Headquarters Base is located at the southeast corner of the core area at the intersection of Baishi Third Road and Shenwan Second Road in Shenzhen Bay Headquarters Base. It is one of the three super high-rise landmarks in the Shenwan Urban Core Area.</p>
+                <p>As the central node of the "Super Cross" formed by the Central Green Axis and the Future City Ridge, the C-Tower project integrates commercial, cultural, office, hotel, and transportation functions.</p>
+            </div>
+
+            <div class="info-section">
+                <h3>Project Highlights</h3>
+                <ul class="highlights-list">
+                    <li>Special Plan Shape and Optimization of the Number of Outer Frame Columns in the Tower</li>
+                    <li>Core Tube Shape Demonstration</li>
+                    <li>Use of Shenzhen High-Rise Regulations to Control Wall Axial Compression Ratio</li>
+                    <li>Comparison and Selection of Connecting Structure Schemes</li>
+                    <li>Special Curtain Wall Steel Structure Design for the Connecting Cantilever Area</li>
+                    <li>Wind Vibration Control Research</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
