@@ -58,6 +58,12 @@
             object-fit: contain;
         }
 
+        /* 默认隐藏汉堡菜单按钮 */
+        .menu-toggle {
+            display: none;
+        }
+
+        /* 导航菜单默认样式 */
         .menu {
             display: flex;
             gap: 60px;
@@ -729,7 +735,7 @@
 
         /* 优化响应式文字基础设置 */
         :root {
-            /* 基础字体大小设置，在不同视口宽度下平滑过渡 */
+            /* 使用 clamp 实现响应式字体大小 */
             font-size: clamp(14px, calc(14px + 0.390625vw), 18px);
         }
 
@@ -781,32 +787,139 @@
         }
 
         /* 移动设备优化 */
-        @media screen and (max-width: 768px) {
-            :root {
-                font-size: clamp(12px, calc(12px + 1vw), 16px);
+        @media screen and (max-width: 1024px) {
+            .social-icons {
+                display: none; /* 在中等屏幕隐藏顶部社交图标 */
             }
-
-            .nav-container {
-                padding: 10px 20px;
-            }
-
+            
             .menu {
-                gap: 20px;
-                font-size: clamp(0.8rem, 1.2vw + 0.6rem, 1rem);
+                gap: 30px;
             }
 
+            /* 调整项目网格布局 */
+            .project-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+            }
+
+            /* 调整内容间距 */
+            .section {
+                padding: 60px var(--container-padding);
+            }
+        }
+
+        /* 平板及更小设备优化 */
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            /* 显示汉堡菜单按钮 */
+            .menu-toggle {
+                display: block;
+                font-size: 24px;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            /* 隐藏原始菜单 */
+            .menu {
+                display: none;
+            }
+
+            /* 移动端菜单样式 */
+            .mobile-menu {
+                display: none;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                padding: 20px;
+                z-index: 1000;
+            }
+
+            .mobile-menu.active {
+                display: block;
+            }
+
+            .mobile-menu .menu-item {
+                margin: 15px 0;
+                text-align: center;
+            }
+
+            /* 项目网格调整为双列 */
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .project-item:nth-child(1),
+            .project-item:nth-child(2),
+            .project-item:nth-child(3),
+            .project-item:nth-child(4),
+            .project-item:nth-child(5) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+            
+            /* About 和 Culture 部分改为单列 */
+            .about-grid,
+            .culture-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            /* 调整页脚布局 */
+            .footer-info {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            /* 调整项目布局 */
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            /* 调整 hero 部分 */
             .hero-content {
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
                 padding: 20px;
             }
 
-            .project-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            /* 调整文字大小 */
+            .hero-content h1 {
+                font-size: clamp(1.5rem, 4vw, 2rem);
             }
 
-            .about-grid, .culture-grid {
+            .hero-content p {
+                font-size: clamp(1rem, 2.5vw, 1.4rem);
+            }
+
+            /* 调整 About 和 Culture 部分 */
+            .about-grid,
+            .culture-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 40px;
+            }
+
+            .about-content,
+            .culture-content {
+                padding: 20px;
+            }
+
+            /* 调整新闻部分 */
+            .news-item {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .news-date {
+                margin-bottom: 10px;
             }
         }
 
@@ -816,21 +929,80 @@
                 font-size: clamp(10px, calc(10px + 1vw), 14px);
             }
 
-            .menu {
-                gap: 15px;
-                font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
-
-            .hero-content {
-                padding: 15px;
-            }
-
+            
+            /* 调整标题大小 */
             .section-title {
-                margin: 20px;
+                font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
+                margin: 30px 20px;
+            }
+            
+            /* 调整 hero 内容 */
+            .hero-content {
+                padding: 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: clamp(1.2rem, 2vw + 0.8rem, 1.8rem);
+            }
+            
+            .hero-content p {
+                font-size: clamp(0.9rem, 1.5vw + 0.6rem, 1.4rem);
+            }
+            
+            /* 调整新闻项目布局 */
+            .news-item {
+                padding: 20px;
+            }
+            
+            /* 调整社交图标大小和间距 */
+            .social-icons {
+                gap: 15px;
+            }
+            
+            .social-icon {
+                font-size: 16px;
             }
 
-            .project-info {
-                padding: 10px;
+            :root {
+                --container-padding: 15px;
+            }
+
+            /* 调整项目网格为单列 */
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            /* 调整图片容器高度 */
+            .project-image,
+            .about-image,
+            .culture-image {
+                height: 250px;
+            }
+
+            /* 调整文字大小和间距 */
+            .about-text,
+            .culture-text-en p {
+                font-size: clamp(0.9rem, 4vw, 1.2rem);
+                line-height: 1.6;
+                margin-bottom: 15px;
+            }
+
+            /* 调整页脚样式 */
+            .footer-info {
+                gap: 20px;
+            }
+
+            .footer-item h4 {
+                font-size: 1rem;
+            }
+
+            .footer-item p {
+                font-size: 0.9rem;
             }
         }
 
@@ -857,6 +1029,231 @@
             height: auto;
             display: block;
         }
+
+        /* 默认隐藏移动端菜单 */
+        .mobile-menu {
+            display: none;
+        }
+
+        /* 基础响应式设置 */
+        :root {
+            --nav-height: 80px;
+            --container-padding: clamp(20px, 5vw, 40px);
+        }
+
+        /* 导航栏响应式优化 */
+        .nav-container {
+            padding: 0 var(--container-padding);
+        }
+
+        /* 社交图标响应式处理 */
+        @media screen and (max-width: 1200px) {
+            .social-icons {
+                gap: 15px;
+            }
+            
+            .menu {
+                gap: 40px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .social-icons {
+                display: none; /* 隐藏顶部导航栏的社交图标 */
+            }
+            
+            .menu {
+                gap: 30px;
+            }
+        }
+
+        /* 项目网格响应式布局 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: clamp(20px, 4vw, 80px);
+            padding: var(--container-padding);
+        }
+
+        /* Hero 部分响应式优化 */
+        .hero-content {
+            padding: clamp(20px, 4vw, 40px);
+            max-width: 90vw;
+        }
+
+        /* About 和 Culture 部分响应式优化 */
+        .about-grid,
+        .culture-grid {
+            gap: clamp(40px, 6vw, 80px);
+            padding: var(--container-padding);
+        }
+
+        /* 新闻部分响应式优化 */
+        .news {
+            padding: clamp(30px, 5vw, 60px) var(--container-padding);
+        }
+
+        .news-item {
+            padding: clamp(20px, 3vw, 30px);
+        }
+
+        /* 页脚响应式优化 */
+        .footer-content {
+            padding: 0 var(--container-padding);
+        }
+
+        /* 移动设备优化 */
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            /* 项目网格在移动端改为单列 */
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            /* Hero 内容在移动端居中显示 */
+            .hero-content {
+                text-align: center;
+                padding: 20px;
+                margin: 0 auto;
+            }
+
+            /* About 和 Culture 部分在移动端优化 */
+            .about-grid,
+            .culture-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-content,
+            .culture-content {
+                padding: 20px;
+            }
+
+            /* 新闻部分移动端优化 */
+            .news-item {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .news-date {
+                margin-bottom: 10px;
+            }
+
+            /* 页脚移动端优化 */
+            .footer-info {
+                gap: 20px;
+            }
+
+            .footer-social {
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+
+        /* 超小屏幕优化 */
+        @media screen and (max-width: 480px) {
+            :root {
+                --container-padding: 15px;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(1.2rem, 4vw, 1.8rem);
+            }
+
+            .hero-content p {
+                font-size: clamp(0.9rem, 3vw, 1.4rem);
+            }
+
+            .section-title {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+                margin: 20px var(--container-padding);
+            }
+
+            /* 图片容器在超小屏幕上的处理 */
+            .project-image,
+            .about-image,
+            .culture-image {
+                height: 250px;
+            }
+
+            /* 调整文字间距 */
+            .about-text,
+            .culture-text-en p {
+                line-height: 1.6;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* 图片响应式处理 */
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        /* 确保所有容器都有合适的内边距 */
+        .section {
+            padding: clamp(40px, 8vw, 100px) var(--container-padding);
+        }
+
+        /* 添加超小屏幕优化 */
+        @media screen and (max-width: 360px) {
+            .hero-content h1 {
+                font-size: clamp(1.2rem, 3vw, 1.5rem);
+            }
+
+            .hero-content p {
+                font-size: clamp(0.8rem, 2vw, 1rem);
+            }
+
+            .section-title {
+                font-size: clamp(1rem, 4vw, 1.4rem);
+            }
+
+            /* 调整间距 */
+            .section {
+                padding: 40px 10px;
+            }
+
+            /* 调整图片容器 */
+            .project-image,
+            .about-image,
+            .culture-image {
+                height: 200px;
+            }
+        }
+
+        /* 添加横屏模式优化 */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .hero-content {
+                padding: 100px 20px 40px;
+            }
+
+            .mobile-menu {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* 优化触摸屏交互 */
+        @media (hover: none) {
+            .menu-item a,
+            .social-icon,
+            .project-item {
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
     </style>
 </head>
 <body>
@@ -866,6 +1263,12 @@
                 <img src="RBS.png" alt="RBS Logo">
             </a>
             
+            <!-- 添加汉堡菜单按钮 -->
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <!-- 原有菜单保持不变 -->
             <div class="menu">
                 <div class="menu-item">
                     <a href="#about">ABOUT</a>
@@ -883,7 +1286,26 @@
                     <a href="#contact">CONTACT</a>
                 </div>
             </div>
-
+            
+            <!-- 添加移动端菜单 -->
+            <div class="mobile-menu">
+                <div class="menu-item">
+                    <a href="#about">ABOUT</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#project">PROJECT</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#culture">CULTURE</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#news">NEWS</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#contact">CONTACT</a>
+                </div>
+            </div>
+            
             <div class="social-icons">
                 <a href="#" class="social-icon">
                     <i class="fab fa-weixin"></i>
@@ -1152,6 +1574,37 @@
             aboutContent.style.transform = 'translateY(20px)';
             aboutContent.style.transition = 'all 0.8s ease';
             observer.observe(aboutContent);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            // 添加菜单切换功能
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation(); // 阻止事件冒泡
+                toggleMenu();
+            });
+            
+            // 点击页面任意位置关闭菜单
+            document.addEventListener('click', (e) => {
+                if (mobileMenu.classList.contains('active') && 
+                    !mobileMenu.contains(e.target)) {
+                    toggleMenu();
+                }
+            });
+            
+            // 阻止菜单内部点击事件冒泡到document
+            mobileMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+            
+            // 菜单切换函数
+            function toggleMenu() {
+                mobileMenu.classList.toggle('active');
+                menuToggle.querySelector('i').classList.toggle('fa-bars');
+                menuToggle.querySelector('i').classList.toggle('fa-times');
+            }
         });
     </script>
 </body>
