@@ -39,18 +39,24 @@
             font-weight: bold;
         }
 
+        /* 基础响应式设置 */
+        :root {
+            --nav-height: 80px;
+            --container-padding: clamp(20px, 5vw, 40px);
+        }
+
         .project-container {
             display: grid;
             grid-template-columns: 45% 55%;
             min-height: 100vh;
-            padding-top: 80px;
+            padding-top: var(--nav-height);
         }
 
         .project-image {
             position: sticky;
-            top: 80px;
-            height: calc(100vh - 80px);
-            padding: 40px;
+            top: var(--nav-height);
+            height: calc(100vh - var(--nav-height));
+            padding: var(--container-padding);
         }
 
         .project-image img {
@@ -60,24 +66,24 @@
         }
 
         .project-content {
-            padding: 60px;
-            height: calc(100vh - 80px);
+            padding: clamp(30px, 5vw, 60px);
+            height: calc(100vh - var(--nav-height));
             overflow-y: auto;
         }
 
         .project-content::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
 
         .project-content::-webkit-scrollbar-thumb {
             background: #D4AF37;
-            border-radius: 2px;
+            border-radius: 3px;
         }
 
         .project-title {
-            font-size: 42px;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
             color: #D4AF37;
-            margin-bottom: 40px;
+            margin-bottom: clamp(20px, 4vw, 40px);
             font-weight: 300;
             opacity: 0;
             transform: translateY(20px);
@@ -85,9 +91,9 @@
         }
 
         .info-section {
-            margin-bottom: 60px;
+            margin-bottom: clamp(30px, 5vw, 60px);
             position: relative;
-            padding-left: 40px;
+            padding-left: clamp(20px, 3vw, 40px);
             opacity: 0;
             transform: translateY(20px);
             animation: fadeIn 0.8s ease forwards;
@@ -104,7 +110,7 @@
         }
 
         .info-section h3 {
-            font-size: 14px;
+            font-size: clamp(0.8rem, 1vw, 0.875rem);
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.4);
             margin-bottom: 10px;
@@ -112,9 +118,12 @@
         }
 
         .info-section p {
-            font-size: 18px;
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 20px;
+            max-width: 65ch;
+            margin-right: auto;
+            margin-left: 0;
         }
 
         .highlights-list {
@@ -148,6 +157,114 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        /* 添加响应式媒体查询 */
+        @media screen and (max-width: 1024px) {
+            .project-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .project-image {
+                position: relative;
+                height: 50vh;
+                top: 0;
+            }
+
+            .project-content {
+                height: auto;
+                padding: var(--container-padding);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-image {
+                height: 40vh;
+                padding: 15px;
+            }
+
+            .project-content {
+                padding: 20px;
+            }
+
+            .project-title {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+                margin-bottom: 30px;
+            }
+
+            .info-section {
+                margin-bottom: 40px;
+                padding-left: 20px;
+            }
+
+            .highlights-list li {
+                font-size: clamp(0.9rem, 1.2vw, 1rem);
+                margin-bottom: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .project-image {
+                height: 30vh;
+                padding: 10px;
+            }
+
+            .project-content {
+                padding: 15px;
+            }
+
+            .project-title {
+                font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+                margin-bottom: 20px;
+            }
+
+            .info-section {
+                margin-bottom: 30px;
+                padding-left: 15px;
+            }
+
+            .info-section h3 {
+                font-size: 0.75rem;
+                margin-bottom: 8px;
+            }
+
+            .info-section p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* 添加横屏模式优化 */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .project-container {
+                grid-template-columns: 40% 60%;
+            }
+
+            .project-image {
+                height: calc(100vh - var(--nav-height));
+            }
+
+            .project-content {
+                height: calc(100vh - var(--nav-height));
+                overflow-y: auto;
+            }
+        }
+
+        /* 优化图片加载 */
+        img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            loading: "lazy";
+        }
+
+        /* 优化触摸屏交互 */
+        @media (hover: none) {
+            .project-content {
+                -webkit-overflow-scrolling: touch;
             }
         }
     </style>
